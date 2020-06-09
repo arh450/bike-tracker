@@ -23,7 +23,7 @@
 
             <div class="accordion" id="activity-form-accordion">
                 <div class="card">
-                    <div class="card-header" id="headingOne">
+                    <div class="card-header" id="activity-form">
                         <h2 class="mb-0">
                             <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
                                 data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -96,6 +96,58 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+        // On click submit event for the form
+        const loadGraphs = () => {
+            console.log("graphs loaded");
+            loadDurationGraph();
+            loadMileageGraph();
+        }
+
+        const loadDurationGraph = () => {
+
+        }
+
+        const loadMileageGraph = () => {
+
+        }
+
+        $(document).ready(() => {
+            loadGraphs();
+        })
+
+        $("#activity-form").on("submit", (event) => {
+            event.preventDefault();
+
+
+            const newActivity = {
+
+
+                mileage: $("#mileage").val,
+                duration: $("#duration").val,
+                date: $("#date").val
+            };
+
+            axios.post("/api/activities", newActivity).then((response) => {
+                alert("Activity Tracked Successfully");
+                $("#mileage").val('');
+                $("#duration").val('');
+                $("#date").val('');
+            }).catch((err) => {
+
+                const message = err.response.data.message;
+                alert(message);
+
+            });
+        })
+            // Create an activity object
+
+            // Post activity data to API @/api/activities
+
+            // when response, display message to user that the activity was tracked
+    </script>
 </body>
 
 </html>
